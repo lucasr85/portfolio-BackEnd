@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Lucas Robles
  */
+
 @RestController
 public class PersonaController {
 
@@ -37,7 +38,7 @@ public class PersonaController {
     @DeleteMapping("/personas/borrar/{id}")
     public String deletePersona(@PathVariable Long id) {
         ipersonaService.deletePersona(id);
-        return "Se elimino a la persona";
+        return "Se eliminó a la persona";
     }
 
     @PutMapping("/personas/editar/{id}")
