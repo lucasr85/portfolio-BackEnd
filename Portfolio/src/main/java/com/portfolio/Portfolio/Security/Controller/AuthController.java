@@ -1,6 +1,8 @@
-
 package com.portfolio.Portfolio.Security.Controller;
 
+import com.portfolio.Portfolio.Security.DTO.JwtDTO;
+import com.portfolio.Portfolio.Security.DTO.LoginUsuario;
+import com.portfolio.Portfolio.Security.DTO.NuevoUsuario;
 import com.portfolio.Portfolio.Security.Entity.Rol;
 import com.portfolio.Portfolio.Security.Entity.Usuario;
 import com.portfolio.Portfolio.Security.Enums.RolNombre;
@@ -30,67 +32,72 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Lucas Robles
  */
-
 @RestController
 @RequestMapping
 @CrossOrigin
 
 public class AuthController {
+
     @Autowired
     PasswordEncoder passwordEncoder;
-    
+
     @Autowired
     AuthenticationManager authenticationManager;
-    
+
     @Autowired
     UsuarioService usuarioService;
-    
+
     @Autowired
     RolService rolService;
-    
+
     @Autowired
     JwtProvider jwtProvider;
-    
-    @PostMapping("/nuevo")
-   public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindinResult){
-       if(bindinResult.hasErrors())
-           return new ResponseEntity(new Mensaje("Email invalido o llenó mal los datos"),HttpStatus.BAD_REQUEST);
-       
-       if(usuarioService.existsByNombreUsuario(nombreUsuario.getNombreUsuario()))
-           return new ResponseEntity(new Mensaje("Usuario existente"),HttpStatus.BAD_REQUEST);
-       
-       if(usuarioService.existsByEmail(nombreUsuario.getEmail))
-           return new ResponseEntity(new Mensaje("Email ya registrado"),HttpStatus.BAD_REQUEST);
-      
-       Usuario usuario = new Usuario(nuevoUsuario.getNombre(),nuevoUsuario.getNombreUsuario(),nuevoUsuario.getEmail(),passwordEncoder.encode(nuevoUsuario.getPassword()));
-       
-       Set<Rol> roles =new HashSet<>();
-       roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
-       
-       if(nuevoUsuario.getRoles().contains("admin"))
-           roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
-       
-       usuario.setRoles(roles);
-       usuarioService.save(usuario);
-       
-       return new ResponseEntity(new Mensaje("Usuario creado"),HttpStatus.CREATED);
-   }
-    
-   @PostMapping("/login")
-   public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-    if(bindingResult.hasErrors())
-        return new ResponseEntity(new Mensaje("Error al completar los datos"),HttpStatus.BAD_REQUEST);
-    
-    Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(),loginUsuario.getPassword()));
-    
-       SecurityContextHolder.getContext().setAuthentication(authentication);
-       
-       String jwt = jwtProvider.generateToken(authentication);
-       
-       UserDetails userDetails =(UserDetails) authentication.getPrincipal();
-       
-       JwtDTO jwtDTO = new jwtDTO(jwt, userDetails.getUsername(),userDetails.getAuthorities());
 
-       return new ResponseEntity(jwtDTO, HttpStatus.OK);
-   }
+    @PostMapping("/nuevo")
+    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindinResult) {
+        if (bindinResult.hasErrors()) {
+            return new ResponseEntity(new Mensaje("Email invalido o llenó mal los datos"), HttpStatus.BAD_REQUEST);
+        }
+
+        if (usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario())) {
+            return new ResponseEntity(new Mensaje("Usuario existente"), HttpStatus.BAD_REQUEST);
+        }
+
+        if (usuarioService.existsByEmail(nuevoUsuario.getEmail())) {
+            return new ResponseEntity(new Mensaje("Email ya registrado"), HttpStatus.BAD_REQUEST);
+        }
+
+        Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
+
+        Set<Rol> roles = new HashSet<>();
+        roles.add(rolService.getByRolNombre(RolNombre.ROLE_USER).get());
+
+        if (nuevoUsuario.getRoles().contains("admin")) {
+            roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
+        }
+
+        usuario.setRoles(roles);
+        usuarioService.save(usuario);
+
+        return new ResponseEntity(new Mensaje("Usuario creado"), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity(new Mensaje("Error al completar los datos"), HttpStatus.BAD_REQUEST);
+        }
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtProvider.generateToken(authentication);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+
+        return new ResponseEntity(jwtDTO, HttpStatus.OK);
+    }
 }
