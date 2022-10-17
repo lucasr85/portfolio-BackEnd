@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
-@CrossOrigin(origins = "https://mgbfrontend.web.app")
+@CrossOrigin(origins = "http://localhost:3306")
+//@CrossOrigin(origins = "https://mgbfrontend.web.app")
 public class PersonaController {
     @Autowired IPersonaService ipersonaService;
     
@@ -32,7 +32,7 @@ public class PersonaController {
     }
     
     
-    @PostMapping("/personas/crear")
+    @PostMapping("/personas/guardar")
     public String createPersona(@RequestBody Persona persona){
         ipersonaService.savePersona(persona);
         return "La persona fue creada correctamente";
@@ -61,9 +61,9 @@ public class PersonaController {
         return persona;
     }
     
-    @GetMapping("/personas/traer/perfil")
-    public Persona findPersona(){
-        return ipersonaService.findPersona((long)1);
+    @GetMapping("/personas/buscar/{id}")
+    public Persona findPersona(@PathVariable Long id){
+        return ipersonaService.findPersona((long)id);
     }
    
 }
