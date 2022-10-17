@@ -1,3 +1,4 @@
+
 package com.portfolio.Portfolio.Security.Service;
 
 import com.portfolio.Portfolio.Security.Entity.Rol;
@@ -15,15 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class RolService {
-
     @Autowired
     IRolRepository irolRepository;
-
-    public Optional<Rol> getByRolNombre(RolNombre rolNombre) {
+    
+    public Optional<Rol> getByRolNombre(RolNombre rolNombre){
         return irolRepository.findByRolNombre(rolNombre);
     }
-
-    public void save(Rol rol) {
+    
+    public void save(Rol rol){
         irolRepository.save(rol);
     }
 }

@@ -5,11 +5,10 @@ package com.portfolio.Portfolio.Security.Controller;
  *
  * @author Lucas Robles
  */
-
-
-
 public class Mensaje {
     private String mensaje;
+    
+    //Constructor
 
     public Mensaje() {
     }
@@ -17,6 +16,7 @@ public class Mensaje {
     public Mensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+    //Getter y Setter
 
     public String getMensaje() {
         return mensaje;
@@ -25,6 +25,5 @@ public class Mensaje {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
     
 }

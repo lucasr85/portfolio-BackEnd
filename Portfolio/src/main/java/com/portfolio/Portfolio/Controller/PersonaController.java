@@ -1,3 +1,4 @@
+
 package com.portfolio.Portfolio.Controller;
 
 import com.portfolio.Portfolio.Entity.Persona;
@@ -20,45 +21,49 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://mgbfrontend.web.app")
 public class PersonaController {
-
-    @Autowired
-    IPersonaService ipersonaService;
-
+    @Autowired IPersonaService ipersonaService;
+    
     @GetMapping("/personas/traer")
-    public List<Persona> getPersona() {
+    public List<Persona> getPersona(){
         return ipersonaService.getPersona();
     }
-
-    @PostMapping("/personas/guardar")
-    public String createPersona(@RequestBody Persona persona) {
-        ipersonaService.setPersona(persona);
-        return "Los datos se ingresaron correctamente";
+    
+    
+    @PostMapping("/personas/crear")
+    public String createPersona(@RequestBody Persona persona){
+        ipersonaService.savePersona(persona);
+        return "La persona fue creada correctamente";
     }
-
+    
+    
     @DeleteMapping("/personas/borrar/{id}")
-    public String deletePersona(@PathVariable Long id) {
+    public String deletePersona(@PathVariable Long id){
         ipersonaService.deletePersona(id);
-        return "Se eliminó a la persona";
+        return "La persona fue eliminada correctamente";
     }
-
+    
+    
     @PutMapping("/personas/editar/{id}")
     public Persona editPersona(@PathVariable Long id,
-            @RequestParam("nombre") String nombre2,
-            @RequestParam("apellido") String apellido2,
-            @RequestParam("img") String img2) {
+                               @RequestParam("nombre") String nuevoNombre,
+                               @RequestParam("apellido") String nuevoApellido,
+                               @RequestParam("img") String nuevoImg){
         Persona persona = ipersonaService.findPersona(id);
-        persona.setNombre(nombre2);
-        persona.setApellido(apellido2);
-        persona.setImg(img2);
-
-        ipersonaService.setPersona(persona);
+        
+        persona.setNombre(nuevoNombre);
+        persona.setApellido(nuevoApellido);
+        persona.setImg(nuevoImg);
+        
+        ipersonaService.savePersona(persona);
         return persona;
     }
     
-    @GetMapping("/personas/buscar/{id}")
-    public Persona findPersona(@PathVariable Long id){
-        return ipersonaService.findPersona(id);
+    @GetMapping("/personas/traer/perfil")
+    public Persona findPersona(){
+        return ipersonaService.findPersona((long)1);
     }
+   
 }

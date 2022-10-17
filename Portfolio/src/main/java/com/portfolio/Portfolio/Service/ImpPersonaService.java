@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
  *
  * @author Lucas Robles
  */
-
 @Service
 public class ImpPersonaService implements IPersonaService{
-    
     @Autowired IPersonaRepository ipersonaRepository;
     
     @Override
@@ -25,7 +23,7 @@ public class ImpPersonaService implements IPersonaService{
     }
 
     @Override
-    public void setPersona(Persona persona) {
+    public void savePersona(Persona persona) {
         ipersonaRepository.save(persona);
     }
 
@@ -41,4 +39,3 @@ public class ImpPersonaService implements IPersonaService{
     }
     
 }
-

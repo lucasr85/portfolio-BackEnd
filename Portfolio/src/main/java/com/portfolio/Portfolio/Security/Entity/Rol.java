@@ -2,15 +2,14 @@
 package com.portfolio.Portfolio.Security.Entity;
 
 import com.portfolio.Portfolio.Security.Enums.RolNombre;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+
 
 /**
  *
@@ -22,20 +21,19 @@ public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @NotNull 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private RolNombre rolNombre;
-
-    @ManyToMany(mappedBy = "rol")
-    private Set<Usuario> usuario;
-        
+    
+    //Constructor
     public Rol() {
     }
 
     public Rol(RolNombre rolNombre) {
         this.rolNombre = rolNombre;
     }
+    
+    //Getter y Setter
 
     public int getId() {
         return id;
@@ -52,5 +50,6 @@ public class Rol {
     public void setRolNombre(RolNombre rolNombre) {
         this.rolNombre = rolNombre;
     }
-        
+    
+    
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.portfolio.Portfolio.Security.Repository;
 
 import com.portfolio.Portfolio.Security.Entity.Rol;
@@ -15,8 +11,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Lucas Robles
  */
-
 @Repository
 public interface IRolRepository extends JpaRepository<Rol, Integer>{
-    Optional<Rol> findByRolNombre(RolNombre rolNombre);    
+    Optional<Rol> findByRolNombre(RolNombre rolNombre);
 }
