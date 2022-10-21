@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/educacion")
 @CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "https://mgbfrontend.web.app")
 public class CEducacion {
     @Autowired
     Seducacion sEducacion;
@@ -64,9 +65,9 @@ public class CEducacion {
         if(sEducacion.existsByNombreE(dtoeducacion.getNombreE())){
             return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
         }
-        
+        //public Educacion(String nombreE, String descripcionE,String nivel, String periodo, String estado, String logo) {
         Educacion educacion = new Educacion(
-                dtoeducacion.getNombreE(), dtoeducacion.getDescripcionE()
+                dtoeducacion.getNombreE(), dtoeducacion.getDescripcionE(), dtoeducacion.getNivel(),dtoeducacion.getPeriodo(),dtoeducacion.getEstado(),dtoeducacion.getLogo()
             );
         sEducacion.save(educacion);
         return new ResponseEntity(new Mensaje("Educacion creada"), HttpStatus.OK);
@@ -89,9 +90,26 @@ public class CEducacion {
         
         educacion.setNombreE(dtoeducacion.getNombreE());
         educacion.setDescripcionE(dtoeducacion.getDescripcionE());
-        
+        educacion.setNivel(dtoeducacion.getNivel());
+        educacion.setPeriodo(dtoeducacion.getPeriodo());
+        educacion.setEstado(dtoeducacion.getEstado());
+        educacion.setLogo(dtoeducacion.getLogo());
+
         sEducacion.save(educacion);
         
         return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
     }
 }
+        /*
+        educacion.setInstitutcion(dtoeducacion.getInstitucion());        
+        educacion.setTitulo(dtoeducacion.getTitulo());
+        educacion.setNivel(dtoeducacion.getNivel());
+        educacion.setPeriodo(dtoeducacion.getPeriodo());
+        educacion.setEstado(dtoeducacion.getEstado());
+        educacion.setLogo(dtoeducacion.getLogo());
+        
+        sEducacion.save(educacion);
+        
+        return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
+    }
+}*/

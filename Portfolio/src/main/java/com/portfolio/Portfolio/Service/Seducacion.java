@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
  *
  * @author Lucas Robles
  */
+
 @Service
 @Transactional
 public class Seducacion {
