@@ -1,9 +1,9 @@
 package com.portfolio.Portfolio.Controller;
 
-import com.portfolio.Portfolio.Dto.dtoHys;
-import com.portfolio.Portfolio.Entity.hys;
+import com.portfolio.Portfolio.Dto.dtoHards;
+import com.portfolio.Portfolio.Entity.Hards;
 import com.portfolio.Portfolio.Security.Controller.Mensaje;
-import com.portfolio.Portfolio.Service.Shys;
+import com.portfolio.Portfolio.Service.SHards;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,72 +27,72 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 
-@RequestMapping("/skill")
-public class CHys {
+@RequestMapping("/hskill")
+public class CHards {
 
     @Autowired
-    Shys shys;
+    SHards shards;
 
     @GetMapping("/lista")
-    public ResponseEntity<List<hys>> list() {
-        List<hys> list = shys.list();
+    public ResponseEntity<List<Hards>> list() {
+        List<Hards> list = shards.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<hys> getById(@PathVariable("id") int id) {
-        if (!shys.existsById(id)) {
+    public ResponseEntity<Hards> getById(@PathVariable("id") int id) {
+        if (!shards.existsById(id)) {
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         }
-        hys hYs = shys.getOne(id).get();
-        return new ResponseEntity(hYs, HttpStatus.OK);
+        Hards hards = shards.getOne(id).get();
+        return new ResponseEntity(hards, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
-        if (!shys.existsById(id)) {
+        if (!shards.existsById(id)) {
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         }
-        shys.delete(id);
+        shards.delete(id);
         return new ResponseEntity(new Mensaje("Skill eliminado"), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody dtoHys dtohys) {
-        if (StringUtils.isBlank(dtohys.getNombre())) {
+    public ResponseEntity<?> create(@RequestBody dtoHards dtohard) {
+        if (StringUtils.isBlank(dtohard.getNombre())) {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
-        if (shys.existsByNombre(dtohys.getNombre())) {
+        if (shards.existsByNombre(dtohard.getNombre())) {
             return new ResponseEntity(new Mensaje("Esa skill ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        hys hYs = new hys(dtohys.getNombre(), dtohys.getPorcentaje());
-        shys.save(hYs);
+        Hards hard = new Hards(dtohard.getNombre(), dtohard.getPorcentaje());
+        shards.save(hard);
 
         return new ResponseEntity(new Mensaje("Skill agregada"), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoHys dtohys) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoHards dtohard) {
         //Validamos si existe el ID
-        if (!shys.existsById(id)) {
+        if (!shards.existsById(id)) {
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
         }
         //Compara nombre de skills
-        if (shys.existsByNombre(dtohys.getNombre()) && shys.getByNombre(dtohys.getNombre()).get()
+        if (shards.existsByNombre(dtohard.getNombre()) && shards.getByNombre(dtohard.getNombre()).get()
                 .getId() != id) {
             return new ResponseEntity(new Mensaje("Esa skill ya existe"), HttpStatus.BAD_REQUEST);
         }
         //No puede estar vacio
-        if (StringUtils.isBlank(dtohys.getNombre())) {
+        if (StringUtils.isBlank(dtohard.getNombre())) {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
 
-        hys hYs = shys.getOne(id).get();
-        hYs.setNombre(dtohys.getNombre());
-        hYs.setPorcentaje(dtohys.getPorcentaje());
+        Hards hard = shards.getOne(id).get();
+        hard.setNombre(dtohard.getNombre());
+        hard.setPorcentaje(dtohard.getPorcentaje());
 
-        shys.save(hYs);
+        shards.save(hard);
         return new ResponseEntity(new Mensaje("Skill actualizada"), HttpStatus.OK);
 
     }

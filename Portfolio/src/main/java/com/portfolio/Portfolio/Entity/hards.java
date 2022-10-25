@@ -1,26 +1,38 @@
-package com.portfolio.Portfolio.Dto;
 
+package com.portfolio.Portfolio.Entity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Lucas Robles
  */
 
-import javax.validation.constraints.NotBlank;
-
-
-public class dtoHys {
-    @NotBlank
+@Entity
+public class Hards {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String nombre;
-    @NotBlank
     private int porcentaje;
 
-    public dtoHys() {
+    public Hards() {
     }
 
-    public dtoHys(String nombre, int porcentaje) {
+    public Hards(String nombre, int porcentaje) {
         this.nombre = nombre;
         this.porcentaje = porcentaje;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -38,6 +50,8 @@ public class dtoHys {
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
+
+    
     
     
 }

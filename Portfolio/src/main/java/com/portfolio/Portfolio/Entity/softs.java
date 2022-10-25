@@ -12,17 +12,17 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class hys {
+public class Softs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private int porcentaje;
 
-    public hys() {
+    public Softs() {
     }
 
-    public hys(String nombre, int porcentaje) {
+    public Softs(String nombre, int porcentaje) {
         this.nombre = nombre;
         this.porcentaje = porcentaje;
     }

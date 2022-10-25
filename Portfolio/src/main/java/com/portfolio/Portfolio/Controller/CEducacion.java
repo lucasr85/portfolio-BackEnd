@@ -100,16 +100,3 @@ public class CEducacion {
         return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
     }
 }
-        /*
-        educacion.setInstitutcion(dtoeducacion.getInstitucion());        
-        educacion.setTitulo(dtoeducacion.getTitulo());
-        educacion.setNivel(dtoeducacion.getNivel());
-        educacion.setPeriodo(dtoeducacion.getPeriodo());
-        educacion.setEstado(dtoeducacion.getEstado());
-        educacion.setLogo(dtoeducacion.getLogo());
-        
-        sEducacion.save(educacion);
-        
-        return new ResponseEntity(new Mensaje("Educacion actualizada"), HttpStatus.OK);
-    }
-}*/
