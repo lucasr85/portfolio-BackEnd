@@ -17,12 +17,12 @@ public class Hards {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
-    private String porcentaje;
+    private int porcentaje;
 
     public Hards() {
     }
 
-    public Hards(String nombre, String porcentaje) {
+    public Hards(String nombre, int porcentaje) {
         this.nombre = nombre;
         this.porcentaje = porcentaje;
     }
@@ -43,11 +43,11 @@ public class Hards {
         this.nombre = nombre;
     }
 
-    public String getPorcentaje() {
+    public int getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(String porcentaje) {
+    public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
 

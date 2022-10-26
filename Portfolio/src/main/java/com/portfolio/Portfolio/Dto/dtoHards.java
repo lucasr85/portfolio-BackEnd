@@ -13,12 +13,12 @@ public class dtoHards {
     @NotBlank
     private String nombre;
     @NotBlank
-    private String porcentaje;
+    private int porcentaje;
 
     public dtoHards() {
     }
 
-    public dtoHards(String nombre, String porcentaje) {
+    public dtoHards(String nombre, int porcentaje) {
         this.nombre = nombre;
         this.porcentaje = porcentaje;
     }
@@ -31,11 +31,11 @@ public class dtoHards {
         this.nombre = nombre;
     }
 
-    public String getPorcentaje() {
+    public int getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(String porcentaje) {
+    public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
     
