@@ -1,7 +1,7 @@
 
 package com.portfolio.Portfolio.Service;
 
-import com.portfolio.Portfolio.Entity.Softs;
+import com.portfolio.Portfolio.Entity.Softs_Skills;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -19,19 +19,19 @@ public class SSofts {
     @Autowired
     RSofts rsofts;
     
-    public List<Softs> list(){
+    public List<Softs_Skills> list(){
         return rsofts.findAll();
     }
     
-    public Optional<Softs> getOne(int id){
+    public Optional<Softs_Skills> getOne(int id){
         return rsofts.findById(id);
     }
     
-    public Optional<Softs> getByNombre(String nombre){
+    public Optional<Softs_Skills> getByNombre(String nombre){
         return rsofts.findByNombre(nombre);
     }
     
-    public void save(Softs skill){
+    public void save(Softs_Skills skill){
         rsofts.save(skill);
     }
     

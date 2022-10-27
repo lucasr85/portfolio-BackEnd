@@ -1,7 +1,7 @@
 
 package com.portfolio.Portfolio.Service;
 
-import com.portfolio.Portfolio.Entity.Hards;
+import com.portfolio.Portfolio.Entity.Hards_Skills;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -19,19 +19,19 @@ public class SHards {
     @Autowired
     RHards rhards;
     
-    public List<Hards> list(){
+    public List<Hards_Skills> list(){
         return rhards.findAll();
     }
     
-    public Optional<Hards> getOne(int id){
+    public Optional<Hards_Skills> getOne(int id){
         return rhards.findById(id);
     }
     
-    public Optional<Hards> getByNombre(String nombre){
+    public Optional<Hards_Skills> getByNombre(String nombre){
         return rhards.findByNombre(nombre);
     }
     
-    public void save(Hards skill){
+    public void save(Hards_Skills skill){
         rhards.save(skill);
     }
     

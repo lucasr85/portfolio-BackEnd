@@ -1,3 +1,4 @@
+
 package com.portfolio.Portfolio.Entity;
 
 import javax.persistence.Entity;
@@ -12,16 +13,17 @@ import javax.persistence.Id;
 
 @Entity
 
-public class Softs {
+public class Hards_Skills {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private int porcentaje;
 
-    public Softs() {
+    public Hards_Skills() {
     }
-    public Softs(String nombre, int porcentaje) {
+
+    public Hards_Skills(String nombre, int porcentaje) {
         this.nombre = nombre;
         this.porcentaje = porcentaje;
     }
@@ -48,5 +50,5 @@ public class Softs {
 
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
-    }         
+    }           
 }

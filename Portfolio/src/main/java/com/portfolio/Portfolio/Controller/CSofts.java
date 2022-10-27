@@ -1,7 +1,7 @@
 package com.portfolio.Portfolio.Controller;
 
 import com.portfolio.Portfolio.Dto.dtoSofts;
-import com.portfolio.Portfolio.Entity.Softs;
+import com.portfolio.Portfolio.Entity.Softs_Skills;
 import com.portfolio.Portfolio.Security.Controller.Mensaje;
 import com.portfolio.Portfolio.Service.SSofts;
 import java.util.List;
@@ -34,17 +34,17 @@ public class CSofts {
     SSofts ssofts;
 
     @GetMapping("/lista")
-    public ResponseEntity<List<Softs>> list() {
-        List<Softs> list = ssofts.list();
+    public ResponseEntity<List<Softs_Skills>> list() {
+        List<Softs_Skills> list = ssofts.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Softs> getById(@PathVariable("id") int id) {
+    public ResponseEntity<Softs_Skills> getById(@PathVariable("id") int id) {
         if (!ssofts.existsById(id)) {
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         }
-        Softs softs = ssofts.getOne(id).get();
+        Softs_Skills softs = ssofts.getOne(id).get();
         return new ResponseEntity(softs, HttpStatus.OK);
     }
 
@@ -66,7 +66,7 @@ public class CSofts {
             return new ResponseEntity(new Mensaje("Esa skill ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        Softs softs = new Softs(dtosoft.getNombre(), dtosoft.getPorcentaje());
+        Softs_Skills softs = new Softs_Skills(dtosoft.getNombre(), dtosoft.getPorcentaje());
         ssofts.save(softs);
 
         return new ResponseEntity(new Mensaje("Skill agregada"), HttpStatus.OK);
@@ -88,7 +88,7 @@ public class CSofts {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
 
-        Softs softs = ssofts.getOne(id).get();
+        Softs_Skills softs = ssofts.getOne(id).get();
         softs.setNombre(dtosoft.getNombre());
         softs.setPorcentaje(dtosoft.getPorcentaje());
 

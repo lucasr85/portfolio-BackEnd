@@ -1,7 +1,7 @@
 package com.portfolio.Portfolio.Controller;
 
 import com.portfolio.Portfolio.Dto.dtoHards;
-import com.portfolio.Portfolio.Entity.Hards;
+import com.portfolio.Portfolio.Entity.Hards_Skills;
 import com.portfolio.Portfolio.Security.Controller.Mensaje;
 import com.portfolio.Portfolio.Service.SHards;
 import java.util.List;
@@ -34,17 +34,17 @@ public class CHards {
     SHards shards;
 
     @GetMapping("/lista")
-    public ResponseEntity<List<Hards>> list() {
-        List<Hards> list = shards.list();
+    public ResponseEntity<List<Hards_Skills>> list() {
+        List<Hards_Skills> list = shards.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Hards> getById(@PathVariable("id") int id) {
+    public ResponseEntity<Hards_Skills> getById(@PathVariable("id") int id) {
         if (!shards.existsById(id)) {
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         }
-        Hards hards = shards.getOne(id).get();
+        Hards_Skills hards = shards.getOne(id).get();
         return new ResponseEntity(hards, HttpStatus.OK);
     }
 
@@ -66,7 +66,7 @@ public class CHards {
             return new ResponseEntity(new Mensaje("Esa skill ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        Hards hard = new Hards(dtohard.getNombre(), dtohard.getPorcentaje());
+        Hards_Skills hard = new Hards_Skills(dtohard.getNombre(), dtohard.getPorcentaje());
         shards.save(hard);
 
         return new ResponseEntity(new Mensaje("Skill agregada"), HttpStatus.OK);
@@ -88,7 +88,7 @@ public class CHards {
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         }
 
-        Hards hard = shards.getOne(id).get();
+        Hards_Skills hard = shards.getOne(id).get();
         hard.setNombre(dtohard.getNombre());
         hard.setPorcentaje(dtohard.getPorcentaje());
 
