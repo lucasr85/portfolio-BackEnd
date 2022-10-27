@@ -49,9 +49,5 @@ public class Softs {
 
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
-    }
-
-    
-    
-    
+    }         
 }

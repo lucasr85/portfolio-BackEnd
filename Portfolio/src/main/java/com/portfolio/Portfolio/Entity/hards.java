@@ -49,9 +49,5 @@ public class Hards {
 
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
-    }
-
-    
-    
-    
+    }           
 }
