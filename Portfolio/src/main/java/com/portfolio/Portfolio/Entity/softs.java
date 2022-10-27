@@ -1,4 +1,3 @@
-
 package com.portfolio.Portfolio.Entity;
 
 import javax.persistence.Entity;
