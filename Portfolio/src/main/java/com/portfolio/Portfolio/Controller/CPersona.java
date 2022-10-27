@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@CrossOrigin(origins = "https://frontendportfoliorobles.web.app")
+@CrossOrigin(origins = "https://roblesportfoliofrontend.web.app")
 public class CPersona {
     @Autowired IPersonaService ipersonaService;
     

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@CrossOrigin(origins = "https://frontendportfoliorobles.web.app")
+@CrossOrigin(origins = "https://roblesportfoliofrontend.web.app")
 
 @RequestMapping("/hskill")
 public class CHards {
