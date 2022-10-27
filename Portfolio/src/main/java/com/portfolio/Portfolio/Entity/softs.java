@@ -11,6 +11,7 @@ import javax.persistence.Id;
  */
 
 @Entity
+
 public class Softs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +21,6 @@ public class Softs {
 
     public Softs() {
     }
-
     public Softs(String nombre, int porcentaje) {
         this.nombre = nombre;
         this.porcentaje = porcentaje;

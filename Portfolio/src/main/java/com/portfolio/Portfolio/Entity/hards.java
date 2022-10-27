@@ -12,6 +12,7 @@ import javax.persistence.Id;
  */
 
 @Entity
+
 public class Hards {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
